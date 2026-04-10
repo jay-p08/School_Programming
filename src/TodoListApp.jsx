@@ -1,3 +1,5 @@
+import './reset.css';
+
 function TodoListApp() {
     return (
         <div>
