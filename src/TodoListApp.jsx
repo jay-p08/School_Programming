@@ -1,8 +1,12 @@
 import { useState } from 'react'
-import './todolist.css';
-import TodoHeader from './components/TodoHeader.jsx';
-import TodoAdder from './components/TodoAdder.jsx';
-import TodoList from './components/TodoList.jsx';
+import './todolist.css'
+// import TodoItemEmpty from './components/TodoItemEmpty.jsx';
+// import Button from './components/Button.jsx';
+// import Checkbox from './components/Checkbox.jsx'
+import TodoHeader from './components/TodoHeader.jsx'
+import TodoAdder from './components/TodoAdder.jsx'
+// import TodoItem from './components/TodoItem.jsx'
+import TodoList from './components/TodoList.jsx'
 
 class Todo {
     constructor(text) {
@@ -14,7 +18,6 @@ class Todo {
 
 function TodoListApp() {
     const [todos, setTodos] = useState([]); //할일 목록 저장 state, 기본값: 빈 리스트
-
     function addTodo(text) {
         setTodos((todos) => [
             //이전todos 가져오자
@@ -24,15 +27,20 @@ function TodoListApp() {
             new Todo(text)
         ]);
     }
-
+    function toggleTodo(id) {
+        setTodos((todos) =>
+            todos.map((todo) =>
+                todo.id === id ? { ...todo, isCompleted: !todo.isCompleted } : todo
+            )
+        );
+    }
     // function addTodo(text) { setTodos((todos) => [...todos, new Todo(text)])}
     return (
         <div className="todo">
             <TodoHeader />
             <TodoAdder addTodo={addTodo} />
-            <TodoList todo={todos}/>
+            <TodoList todos={todos} />
         </div>
     )
-} // TodoListApp()
-
+}
 export default TodoListApp;
